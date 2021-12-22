@@ -1,8 +1,9 @@
 import React from 'react';
-import {View, Text, FlatList, ActivityIndicator} from 'react-native';
+import {View, Text, FlatList, StyleSheet} from 'react-native';
 import useFetch from '../../hooks/useFetch';
 import Config from 'react-native-config';
 import DetailCard from '../../components/DetailCard/DetailCard';
+import Loading from '../../components/Loading';
 const Detail = ({route}) => {
   const {idNumber} = route.params;
   const {data, loading, error} = useFetch(
@@ -12,7 +13,11 @@ const Detail = ({route}) => {
   const renderItem = ({item}) => <DetailCard item={item} />;
 
   if (loading) {
-    return <ActivityIndicator size="large" color="black" />;
+    return (
+      <View style={styles.loadingContainer}>
+        <Loading />
+      </View>
+    );
   }
   if (error) {
     return <Text>{error}</Text>;
@@ -24,5 +29,9 @@ const Detail = ({route}) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  loadingContainer: {flex: 1, backgroundColor: 'white'},
+});
 
 export default Detail;

@@ -1,9 +1,10 @@
 import React from 'react';
-import {View, Text, FlatList, ActivityIndicator} from 'react-native';
+import {View, Text, FlatList} from 'react-native';
 import useFetch from '../../hooks/useFetch';
 import Config from 'react-native-config';
 import MealsCard from '../../components/MealsCard';
 import styles from './Meals.style';
+import Loading from '../../components/Loading';
 const Meals = ({route, navigation}) => {
   const {category} = route.params;
   const {data, loading, error} = useFetch(
@@ -19,7 +20,11 @@ const Meals = ({route, navigation}) => {
   );
 
   if (loading) {
-    return <ActivityIndicator size="large" color="black" />;
+    return (
+      <View style={styles.loadingContainer}>
+        <Loading />
+      </View>
+    );
   }
   if (error) {
     return <Text>{error}</Text>;

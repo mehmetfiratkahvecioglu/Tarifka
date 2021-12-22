@@ -1,15 +1,10 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  Text,
-  FlatList,
-  ActivityIndicator,
-  StyleSheet,
-} from 'react-native';
+import {SafeAreaView, Text, FlatList, StyleSheet, View} from 'react-native';
 
 import Config from 'react-native-config'; // config
 import CategoryCard from '../../components/renderCategories'; //compoenents
 import useFetch from '../../hooks/useFetch'; //hook
+import Loading from '../../components/Loading';
 
 const Categories = ({navigation}) => {
   const {data, loading, error} = useFetch(Config.CATEGORIES_API_URL);
@@ -28,7 +23,11 @@ const Categories = ({navigation}) => {
   );
 
   if (loading) {
-    return <ActivityIndicator size="large" color="black" />;
+    return (
+      <View style={styles.loadingContainer}>
+        <Loading />
+      </View>
+    );
   }
   if (error) {
     return <Text>{error}</Text>;
@@ -43,5 +42,6 @@ const Categories = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {flex: 1, backgroundColor: 'orange'},
+  loadingContainer: {flex: 1, backgroundColor: 'white'},
 });
 export default Categories;
