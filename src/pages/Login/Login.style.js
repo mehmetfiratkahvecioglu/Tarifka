@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   imageContainer: {flex: 1, justifyContent: 'center', alignItems: 'center'},
   formContainer: {flex: 1},
   logo: {
-    height: Dimensions.get('window').height / 2,
+    height: Dimensions.get('window').height / 3,
     width: Dimensions.get('window').width / 1.2,
     resizeMode: 'contain',
     tintColor: 'white',

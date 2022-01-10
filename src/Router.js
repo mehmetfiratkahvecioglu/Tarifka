@@ -8,11 +8,13 @@ import Detail from './pages/Detail';
 import Login from './pages/Login';
 const Stack = createNativeStackNavigator();
 
+/* bunu aşağı eklemeayi unutmaa login sayfası
+<Stack.Screen name="Log in" component={Login} />;
+*/
 function Router() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Log in" component={Login} />
         <Stack.Screen name="Categories" component={Categories} />
         <Stack.Screen name="Meals" component={Meals} />
         <Stack.Screen name="Detail" component={Detail} />
