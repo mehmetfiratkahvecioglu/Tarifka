@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Image, Alert, Text} from 'react-native';
+import {View, Image, Alert} from 'react-native';
 import Input from '../../components/Input'; //components
 import Button from '../../components/Button';
 import styles from './Login.style'; //style
@@ -9,7 +9,7 @@ import Config from 'react-native-config';
 
 import {useDispatch} from 'react-redux';
 
-const Login = ({navigation}) => {
+const Login = () => {
   const {data, loading, error, post} = usePost();
   const dispatch = useDispatch();
   const handlePress = values => {
