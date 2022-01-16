@@ -1,20 +1,26 @@
 import React from 'react';
-import {View, Image, Alert} from 'react-native';
+import {View, Image, Alert, Text} from 'react-native';
 import Input from '../../components/Input'; //components
 import Button from '../../components/Button';
 import styles from './Login.style'; //style
 import {Formik} from 'formik';
 import usePost from '../../hooks/usePost';
 import Config from 'react-native-config';
-const Login = () => {
+
+import {useDispatch} from 'react-redux';
+
+const Login = ({navigation}) => {
   const {data, loading, error, post} = usePost();
-  const handlePress = x => {
-    post(Config.AUTH_API_URL + '/login', x);
+  const dispatch = useDispatch();
+  const handlePress = values => {
+    post(Config.AUTH_API_URL + '/login', values);
   };
   if (error) {
-    Alert.alert('Tarifka', 'HATa');
+    Alert.alert('Tarifka', 'HATA');
   }
-  console.log(data);
+  if (data) {
+    dispatch({type: 'SET_USER', payload: {user}});
+  }
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -36,7 +42,7 @@ const Login = () => {
               name={'key'}
               isSecure
             />
-            <Button text="SIGN IN" onPress={handleSubmit} />
+            <Button text="SIGN IN" onPress={handleSubmit} loading={loading} />
           </View>
         )}
       </Formik>
@@ -45,3 +51,26 @@ const Login = () => {
 };
 
 export default Login;
+
+const user = {
+  address: {
+    geolocation: {
+      lat: '50.3467',
+      long: '-20.1310',
+    },
+    city: 'San Antonio',
+    street: 'Hunters Creek Dr',
+    number: 6454,
+    zipcode: '98234-1734',
+  },
+  id: 4,
+  email: 'don@gmail.com',
+  username: 'donero',
+  password: 'ewedon',
+  name: {
+    firstname: 'don',
+    lastname: 'romer',
+  },
+  phone: '1-765-789-6734',
+  __v: 0,
+};
